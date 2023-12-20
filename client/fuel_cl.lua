@@ -18,7 +18,7 @@ function SetFuel(vehicle, fuel)
 end
 
 RegisterCommand("setfuel", function(source, args)
-    local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
     local fuelLevel = tonumber(args[1])
 
     if allowedToUse then

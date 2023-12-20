@@ -40,7 +40,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        local playerPed = GetPlayerPed(-1)
+        local playerPed = PlayerPedId()
         if playerPed and IsPedInAnyVehicle(playerPed, false) then
             local vehicle = GetVehiclePedIsIn(playerPed, false)
             
@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
-        local playerPed = GetPlayerPed(-1)
+        local playerPed = PlayerPedId()
         if playerPed and IsPedInAnyVehicle(playerPed, false) then
             local vehicle = GetVehiclePedIsIn(playerPed, false)
             

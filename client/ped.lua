@@ -31,8 +31,9 @@ function nearPed(model, coords, heading, gender, animDict, animName, scenario)
 	local genderNum = 0
 --AddEventHandler('nearPed', function(model, coords, heading, gender, animDict, animName)
 	-- Request the models of the peds from the server, so they can be ready to spawn.
-	RequestModel(GetHashKey(model))
-	while not HasModelLoaded(GetHashKey(model)) do
+	local hash = joaat(model)
+	RequestModel(hash)
+	while not HasModelLoaded(hash) do
 		Citizen.Wait(1)
 	end
 	
@@ -48,10 +49,10 @@ function nearPed(model, coords, heading, gender, animDict, animName, scenario)
 	--Check if someones coordinate grabber thingy needs to subract 1 from Z or not.
 	if Config.MinusOne then 
 		local x, y, z = table.unpack(coords)
-		ped = CreatePed(genderNum, GetHashKey(model), x, y, z - 1, heading, false, true)
+		ped = CreatePed(genderNum, hash, x, y, z - 1, heading, false, true)
 		
 	else
-		ped = CreatePed(genderNum, GetHashKey(v.model), coords, heading, false, true)
+		ped = CreatePed(genderNum, joaat(v.model), coords, heading, false, true)
 	end
 	
 	SetEntityAlpha(ped, 0, false)
