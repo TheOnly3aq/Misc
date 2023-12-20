@@ -15,7 +15,7 @@ function loadTrainModels()
     }
 
     for _, vehicleName in ipairs(trainsAndCarriages) do
-        local modelHashKey = GetHashKey(vehicleName)
+        local modelHashKey = joaat(vehicleName)
         RequestModel(modelHashKey)
         while not HasModelLoaded(modelHashKey) do
             Citizen.Wait(500)
