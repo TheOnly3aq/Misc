@@ -1,4 +1,3 @@
-
 local engineStalled = false
 local lastVehicleHealth = 0
 local dizzyEffectActive = false
@@ -43,7 +42,7 @@ Citizen.CreateThread(function()
         local playerPed = PlayerPedId()
         if playerPed and IsPedInAnyVehicle(playerPed, false) then
             local vehicle = GetVehiclePedIsIn(playerPed, false)
-            
+
             if DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) then
                 local currentHealth = GetVehicleBodyHealth(vehicle)
 
@@ -62,7 +61,7 @@ Citizen.CreateThread(function()
         local playerPed = PlayerPedId()
         if playerPed and IsPedInAnyVehicle(playerPed, false) then
             local vehicle = GetVehiclePedIsIn(playerPed, false)
-            
+
             if DoesEntityExist(vehicle) and IsEntityAVehicle(vehicle) then
                 local currentHealth = GetVehicleBodyHealth(vehicle)
                 local healthDifference = lastVehicleHealth - currentHealth

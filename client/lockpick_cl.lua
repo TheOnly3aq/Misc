@@ -32,7 +32,6 @@ RegisterCommand('unlock', function()
         end
     else
         TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "You are too far away from the vehicle!")
-
     end
 end)
 
@@ -51,7 +50,7 @@ RegisterCommand('lp', function()
         if locked ~= 1 then
             TaskPlayAnim(ped, "mp_arresting", "a_uncuff", 1.0, -1.0, 5500, 0, 1, true, true, true)
             local seconds = math.random(9, 12)
-            local circles = math.random(4, 7)
+            local circles = math.random(8, 13)
             local success = exports['qb-lock']:StartLockPickCircle(circles, seconds, success)
             if success then
                 SetVehicleDoorsLocked(veh, 7)
@@ -70,6 +69,9 @@ RegisterCommand('lp', function()
                 SetVehicleAlarmTimeLeft(veh, 11000)
 
                 FreezeEntityPosition(ped, false)
+            else
+                SetVehicleAlarm(veh, true)
+                SetVehicleAlarmTimeLeft(veh, 101000)
             end
         end
     end

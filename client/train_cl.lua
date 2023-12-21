@@ -27,17 +27,16 @@ loadTrainModels()
 
 RegisterCommand("train", function(source, args, rawCommand)
     if allowedToUse then
+        if #args < 1 then
+            TriggerEvent('chat:addMessage', {
+                args = {
+                    'Error, provide a variation id, you can find those in trains.xml. Variations range from 0 to 26.'
+                }
+            })
+            return
+        end
 
-    if #args < 1 then
-        TriggerEvent('chat:addMessage', {
-            args = {
-                'Error, provide a variation id, you can find those in trains.xml. Variations range from 0 to 26.'
-            }
-        })
-        return
-    end
-
-    local playerCoords = GetEntityCoords(PlayerPedId())
+        local playerCoords = GetEntityCoords(PlayerPedId())
         CreateMissionTrain(
             tonumber(args[1]),
             playerCoords.x, playerCoords.y, playerCoords.z,

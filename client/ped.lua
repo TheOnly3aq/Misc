@@ -11,7 +11,7 @@ Citizen.CreateThread(function()
 				v.ped = ped
 				v.isRendered = true
 			end
-			
+
 			if dist >= Config.Distance and v.isRendered then
 				if Config.Fade then
 					for i = 255, 0, -51 do
@@ -29,38 +29,37 @@ end)
 
 function nearPed(model, coords, heading, gender, animDict, animName, scenario)
 	local genderNum = 0
---AddEventHandler('nearPed', function(model, coords, heading, gender, animDict, animName)
+	--AddEventHandler('nearPed', function(model, coords, heading, gender, animDict, animName)
 	-- Request the models of the peds from the server, so they can be ready to spawn.
 	local hash = joaat(model)
 	RequestModel(hash)
 	while not HasModelLoaded(hash) do
 		Citizen.Wait(1)
 	end
-	
+
 	-- Convert plain language genders into what fivem uses for ped types.
 	if gender == 'male' then
 		genderNum = 4
-	elseif gender == 'female' then 
+	elseif gender == 'female' then
 		genderNum = 5
 	else
 		print("No gender provided! Check your configuration!")
-	end	
+	end
 
 	--Check if someones coordinate grabber thingy needs to subract 1 from Z or not.
-	if Config.MinusOne then 
+	if Config.MinusOne then
 		local x, y, z = table.unpack(coords)
 		ped = CreatePed(genderNum, hash, x, y, z - 1, heading, false, true)
-		
 	else
 		ped = CreatePed(genderNum, joaat(v.model), coords, heading, false, true)
 	end
-	
+
 	SetEntityAlpha(ped, 0, false)
-	
+
 	if Config.Frozen then
 		FreezeEntityPosition(ped, true) --Don't let the ped move.
 	end
-	
+
 	if Config.Invincible then
 		SetEntityInvincible(ped, true) --Don't let the ped die.
 	end
@@ -68,7 +67,7 @@ function nearPed(model, coords, heading, gender, animDict, animName, scenario)
 	if Config.Stoic then
 		SetBlockingOfNonTemporaryEvents(ped, true) --Don't let the ped react to his surroundings.
 	end
-	
+
 	--Add an animation to the ped, if one exists.
 	if animDict and animName then
 		RequestAnimDict(animDict)
@@ -81,7 +80,7 @@ function nearPed(model, coords, heading, gender, animDict, animName, scenario)
 	if scenario then
 		TaskStartScenarioInPlace(ped, scenario, 0, true) -- begins peds animation
 	end
-	
+
 	if Config.Fade then
 		for i = 0, 255, 51 do
 			Citizen.Wait(50)

@@ -25,10 +25,56 @@ RegisterCommand("setfuel", function(source, args)
         if vehicle and fuelLevel then
             SetFuel(vehicle, fuelLevel)
         else
-            TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Unauthorized use! This incident will be reported!")
+            TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "You are not in a vehicle!")
         end
         TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Fuel level set to " .. fuelLevel)
     else
-        TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "No permission!")
+        TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Unauthorized use! This incident will be reported!")
+    end
+end, false)
+
+local function IsNearChargeStation()
+    local ped = PlayerPedId()
+    local pedLocation = GetEntityCoords(ped, 0)
+    for _, item in pairs(Charge_Config.Locations) do
+        local distance = GetDistanceBetweenCoords(item.x, item.y, item.z, pedLocation["x"], pedLocation["y"],
+            pedLocation["z"], true)
+        if distance <= item.r then
+            return true
+        end
+    end
+end
+
+local isCharging = false
+
+RegisterCommand("charge", function(source)
+    local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+    local fuelLevel = Charge_Config.Level
+    local vehicleoil = GetVehicleOilLevel(vehicle)
+    if vehicleoil == 0.0000 then
+        if IsNearChargeStation() then
+            if not isCharging then
+                isCharging = true
+                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
+                    "Your electric vehicle is charging... " .. Charge_Config.Timeout .. " Seconds remaining")
+
+                TaskLeaveVehicle(PlayerPedId(), vehicle, 0)
+
+                Citizen.Wait((1000 * Charge_Config.Timeout))
+                SetFuel(vehicle, fuelLevel)
+
+                TaskEnterVehicle(PlayerPedId(), vehicle, -1, 0, 1.0, 1, 0)
+
+                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
+                    "Your electric vehicle is fully charged! You can now get back in!")
+                isCharging = false
+            else
+                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "Your electric vehicle is already charging!")
+            end
+        else
+            TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You're not near a charging station!")
+        end
+    else
+        TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You are not in an electric vehicle!")
     end
 end, false)

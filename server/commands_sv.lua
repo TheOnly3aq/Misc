@@ -1,6 +1,3 @@
-
-
-
 lib.addCommand("goto", {
     help = "Admin command, teleport to a player.",
     restricted = "group.staff",
@@ -36,4 +33,3 @@ lib.addCommand("bring", {
     local targetPed = GetPlayerPed(args.target)
     SetEntityCoords(targetPed, coords.x, coords.y, coords.z)
 end)
-
