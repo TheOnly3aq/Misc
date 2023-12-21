@@ -57,17 +57,18 @@ RegisterCommand("charge", function(source)
                 isCharging = true
                 TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
                     "Your electric vehicle is charging... " .. Charge_Config.Timeout .. " Seconds remaining")
-
                 TaskLeaveVehicle(PlayerPedId(), vehicle, 0)
-
                 Citizen.Wait((1000 * Charge_Config.Timeout))
-                SetFuel(vehicle, fuelLevel)
-
-                TaskEnterVehicle(PlayerPedId(), vehicle, -1, 0, 1.0, 1, 0)
-
-                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
-                    "Your electric vehicle is fully charged! You can now get back in!")
-                isCharging = false
+                if IsNearChargeStation() then
+                    SetFuel(vehicle, fuelLevel)
+                    TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
+                        "Your electric vehicle is fully charged! You can now get back in!")
+                    isCharging = false
+                else
+                    TriggerEvent("chatMessage", "CHARGER", { 255, 0, 0 },
+                        "You drove away from the charging station! Your vehicle has not been charged.")
+                    isCharging = false
+                end
             else
                 TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "Your electric vehicle is already charging!")
             end

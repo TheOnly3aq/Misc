@@ -34,7 +34,7 @@ Charge_Config = {
 		{ name = "Charging Station", id = 361, r = 4.0, x = 645.1025,  y = 280.3252,  z = 102.1716 },
 		{ name = "Charging Station", id = 361, r = 4.0, x = -729.0958, y = -911.1166, z = 18.01393 }
 	},
-	Timeout = 5, --in seconds
+	Timeout = 120, --in seconds
 	Level = 100.0
 }
 
