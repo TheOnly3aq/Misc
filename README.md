@@ -20,6 +20,6 @@ Most of these scripts are made by other people, and some I've made myself. I was
 
 ### Dependencies
  
-- [ND_Core](https://github.com/ND-Framework/ND_Core)
+- [ND_Fuel](https://github.com/ND-Framework/ND_Fuel)
 - [Ox_Lib](https://github.com/overextended/ox_lib)
 - [qb-lock](https://github.com/Tex27/qb-lock) (Make sure to remove `exports['qb-lock']:` on line 7 in `client/client.lua`!)
