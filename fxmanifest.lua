@@ -1,8 +1,8 @@
 
-author "Vroom"
+author "Vroom Vroom Man"
 description "Vroom's Miscellaneous scripts (VMS)"
-version "1.2.0"
-repository 'https://github.com/theonly3aq'
+version "1.0.1"
+repository 'https://github.com/theonly3aq/misc'
 
 fx_version "cerulean"
 game "gta5"

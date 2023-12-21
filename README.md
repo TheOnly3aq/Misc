@@ -14,6 +14,12 @@
 - Ped spawner script (original [repo](https://github.com/Fiffers/ped_spawner))
 
 
-You can edit the ace permission, as well as other configs in shared/config.lua
+You can edit the ace permission, as well as other configs in `shared/config.lua`
 
 Most of these scripts are made by other people, and some I've made myself. I was tired of having multiple scripts taking up multiple resources so I made it all in one. Hope you enjoy
+
+### Dependencies
+ 
+- [ND_Core](https://github.com/ND-Framework/ND_Core)
+- [Ox_Lib](https://github.com/overextended/ox_lib)
+- [qb-lock](https://github.com/Tex27/qb-lock) (Make sure to remove `exports['qb-lock']:` on line 7 in `client/client.lua`!)
