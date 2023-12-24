@@ -8,22 +8,8 @@ AddEventHandler("misc.returnIsAllowed", function(isAllowed)
     allowedToUse = isAllowed
 end)
 
-function loadTrainModels()
-    local trainsAndCarriages = {
-        'freight', 'metrotrain', 'freightcont1', 'freightcar',
-        'freightcar2', 'freightcont2', 'tankercar', 'freightgrain'
-    }
+SetRandomTrains(true)
 
-    for _, vehicleName in ipairs(trainsAndCarriages) do
-        local modelHashKey = joaat(vehicleName)
-        RequestModel(modelHashKey)
-        while not HasModelLoaded(modelHashKey) do
-            Citizen.Wait(500)
-        end
-    end
-end
-
-loadTrainModels()
 
 RegisterCommand("train", function(source, args, rawCommand)
     if allowedToUse then
@@ -48,3 +34,25 @@ RegisterCommand("train", function(source, args, rawCommand)
         TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Unauthorized use! This incident will be reported!")
     end
 end, false)
+
+RegisterCommand("randomtrain", function(source, args, rawCommand)
+    if allowedToUse then
+        if args[1] == "on" then
+            SetTrainTrackSpawnFrequency(0, 120000) 
+            SetTrainTrackSpawnFrequency(3, 120000) 
+            SwitchTrainTrack(0, true)
+            SwitchTrainTrack(3, true)
+            SetRandomTrains(true)
+            TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Turned random trains on!")
+        elseif args[1] == "off" then
+            SetRandomTrains(false)
+            TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Turned random trains off!")
+        else
+        TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Please use ON or OFF")
+        end
+    else
+        TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Unauthorized use! This incident will be reported!")
+    end
+end, false)
+
+

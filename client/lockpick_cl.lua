@@ -35,6 +35,19 @@ RegisterCommand('unlock', function()
     end
 end)
 
+RegisterNetEvent('lockLights')
+AddEventHandler('lockLights',function()
+    local ped = PlayerPedId()
+    local pos = GetEntityCoords(ped)
+    local veh = GetClosestVehicle(pos.x, pos.y, pos.z, 3.0, 0, 71)	SetVehicleLights(vehicle, 2)
+	Wait (150)
+	SetVehicleLights(veh, 0)
+	Wait (150)
+	SetVehicleLights(veh, 2)
+	Wait (150)
+	SetVehicleLights(veh, 0)	
+end)
+
 
 RegisterCommand('lp', function()
     local ped = PlayerPedId()
@@ -58,14 +71,15 @@ RegisterCommand('lp', function()
                 RequestAnimDict("mp_arresting")
                 while (not HasAnimDictLoaded("mp_arresting")) do Citizen.Wait(0) end
                 TaskPlayAnim(ped, "mp_arresting", "a_uncuff", 1.0, -1.0, 5500, 0, 1, true, true, true)
-
                 SetVehicleDoorsLocked(veh, 1)
                 SetVehicleAlarm(veh, true)
                 SetVehicleNeedsToBeHotwired(veh, true)
                 SetVehicleDoorsLockedForAllPlayers(veh, false)
                 FreezeEntityPosition(ped, true)
-
                 Citizen.Wait(5500)
+                TriggerEvent('codex-sound:PlayOnOne', 'carlock', 0.1)
+				TriggerEvent('lockLights')
+                Citizen.Wait(1000)
                 SetVehicleAlarmTimeLeft(veh, 11000)
 
                 FreezeEntityPosition(ped, false)

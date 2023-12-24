@@ -1,10 +1,6 @@
 --FiveM's list of Ped Models can be found here: https://docs.fivem.net/docs/game-references/ped-models/
 --A list of all the animations can be found here: https://alexguirre.github.io/animations-list/
 
-
-
-
-
 -- ██╗░░░██╗  ███╗░░░███╗  ░██████╗
 -- ██║░░░██║  ████╗░████║  ██╔════╝
 -- ╚██╗░██╔╝  ██╔████╔██║  ╚█████╗░
@@ -34,6 +30,29 @@ Charge_Config = {
 		{ name = "Charging Station", id = 361, r = 4.0, x = 645.1025,  y = 280.3252,  z = 102.1716 },
 		{ name = "Charging Station", id = 361, r = 4.0, x = -729.0958, y = -911.1166, z = 18.01393 }
 	},
+	electricVehicles = {
+        `Imorgon`,
+        `Neon`,
+        `Raiden`,
+        `Cyclone`,
+        `Voltic`,
+        `Voltic2`,
+        `Tezeract`,
+        `Dilettante`,
+        `Dilettante2`,
+        `Airtug`,
+        `Caddy`,
+        `Caddy2`,
+        `Caddy3`,
+        `Surge`,
+        `Khamelion`,
+        `RCBandito`,
+        `teslax`,
+        `models`,
+        `teslapd`,
+        `iak_wheelchair`,
+        `taycan`
+    },
 	Timeout = 120, --in seconds
 	Level = 100.0
 }

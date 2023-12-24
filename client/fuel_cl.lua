@@ -49,33 +49,38 @@ local isCharging = false
 
 RegisterCommand("charge", function(source)
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+    local vehiclecheck = IsPedInAnyVehicle(PlayerPedId(), true)
     local fuelLevel = Charge_Config.Level
     local vehicleoil = GetVehicleOilLevel(vehicle)
-    if vehicleoil == 0.0000 then
-        if IsNearChargeStation() then
-            if not isCharging then
-                isCharging = true
-                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
-                    "Your electric vehicle is charging... " .. Charge_Config.Timeout .. " Seconds remaining")
-                TaskLeaveVehicle(PlayerPedId(), vehicle, 0)
-                Citizen.Wait((1000 * Charge_Config.Timeout))
-                if IsNearChargeStation() then
-                    SetFuel(vehicle, fuelLevel)
+    if vehiclecheck then
+        if vehicleoil == 0.0000 then
+            if IsNearChargeStation() then
+                if not isCharging then
+                    isCharging = true
                     TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
-                        "Your electric vehicle is fully charged! You can now get back in!")
-                    isCharging = false
+                        "Your electric vehicle is charging... " .. Charge_Config.Timeout .. " Seconds remaining")
+                    TaskLeaveVehicle(PlayerPedId(), vehicle, 0)
+                    Citizen.Wait((1000 * Charge_Config.Timeout))
+                    if IsNearChargeStation() then
+                        SetFuel(vehicle, fuelLevel)
+                        TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 },
+                            "Your electric vehicle is fully charged! You can now get back in!")
+                        isCharging = false
+                    else
+                        TriggerEvent("chatMessage", "CHARGER", { 255, 0, 0 },
+                            "You drove away from the charging station! Your vehicle has not been charged.")
+                        isCharging = false
+                    end
                 else
-                    TriggerEvent("chatMessage", "CHARGER", { 255, 0, 0 },
-                        "You drove away from the charging station! Your vehicle has not been charged.")
-                    isCharging = false
+                    TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "Your electric vehicle is already charging!")
                 end
             else
-                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "Your electric vehicle is already charging!")
+                TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You're not near a charging station!")
             end
         else
-            TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You're not near a charging station!")
+            TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You are not in an electric vehicle!")
         end
     else
-        TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You are not in an electric vehicle!")
+        TriggerEvent("chatMessage", "CHARGER", { 0, 0, 255 }, "You are not in a vehicle!")
     end
 end, false)
