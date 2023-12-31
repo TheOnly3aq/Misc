@@ -1,4 +1,4 @@
-# Vroom's Miscellaneous Scirpts (VMS)
+# Vroom's Miscellaneous Scripts (VMS)
 
 ### This script includes:
 
