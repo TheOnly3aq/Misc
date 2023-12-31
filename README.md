@@ -1,4 +1,4 @@
-# Vroom's Miscellaneous Scirpts (VMS)
+# Vroom's Miscellaneous Scripts (VMS)
 
 ### This script includes:
 
@@ -16,6 +16,7 @@
 - Ped spawner script (original [repo](https://github.com/Fiffers/ped_spawner))
 - 50% chance that ai cars are locked/unlocked + no more breaking ai car windows
 - Flashlight always on (flashlight won't go off when you stop aiming your gun)
+- Remove all cop cars
 
 You can edit the ace permission, as well as other configs in `shared/config.lua`
 
