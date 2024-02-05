@@ -30,6 +30,7 @@ RegisterCommand("setfuel", function(source, args)
         TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Fuel level set to " .. fuelLevel)
     else
         TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Unauthorized use! This incident will be reported!")
+        print("Unautoized use of the 'randomtrain' commmand by " .. source)
     end
 end, false)
 
