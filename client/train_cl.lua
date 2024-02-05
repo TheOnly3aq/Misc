@@ -32,7 +32,7 @@ RegisterCommand("train", function(source, args, rawCommand)
         )
     else
         TriggerEvent("chatMessage", "SYSTEM", { 255, 0, 0 }, "Unauthorized use! This incident will be reported!")
-        print("Unautoized use of the 'randomtrain' commmand by " .. source)
+        print("Unautoized use of the 'train' commmand by " .. source)
     end
 end, false)
 
