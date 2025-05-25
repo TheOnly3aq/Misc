@@ -4,7 +4,7 @@
 <div align="center">
 
 
-# MISC
+# Vroom's Miscellaneous Scripts (VMS)
 
 <em>Elevate your gameplay with seamless, immersive experiences.</em>
 
